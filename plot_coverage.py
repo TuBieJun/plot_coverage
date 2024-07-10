@@ -42,4 +42,4 @@ if  __name__ == "__main__":
             d_depth.setdefault(items[0], []).append(d)
     
     
-    plot_coverage(d_depth, prefix, "%s.png"%(prefix), step=step, figsize=(30, 20), ylim=(0, max_depth))
+    plot_coverage(d_depth, prefix, "%s.png"%(prefix), step=step, figsize=(30, 5), ylim=(0, max_depth))
