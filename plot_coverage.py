@@ -2,9 +2,9 @@ import sys
 import matplotlib.pyplot as plt
 
 
-def plot_coverage(d_depth, outfile, title, step=1, figsize=(10,5), ylim=(0, 100)):
+def plot_coverage(d_depth, outfile, title, step=1, figsize=(30,6), ylim=(0, 100)):
     s = 0
-    plt.figure(figsize=figsize)
+    fig,ax = plt.subplots(figsize=figsize)
     x_label_index = []
     x_label_name = []
     for k,v in d_depth.items():
@@ -12,14 +12,15 @@ def plot_coverage(d_depth, outfile, title, step=1, figsize=(10,5), ylim=(0, 100)
         l = len(block)
         x_label_index.append(int((s+s+l)/2))
         x_label_name.append(k)
-        plt.scatter(list(range(s, s+l)), block, marker=".")
+        ax.scatter(list(range(s, s+l)), block, marker=".")
         s += l
-    plt.xticks(x_label_index, x_label_name,fontdict={"fontsize":10})
-    plt.xlabel("genome", fontdict={"fontsize":15})
-    plt.ylabel("depth", fontdict={"fontsize":15})
-    plt.ylim(ylim)
-    plt.title(title, fontdict={"fontsize":20})
-    plt.savefig(outfile)
+    ax.set_xticks(x_label_index, x_label_name, fontsize=15)
+    ax.tick_params("y", labelsize=15)
+    ax.set_xlabel("genome", fontsize = 20)
+    ax.set_ylabel("depth", fontsize = 20)
+    ax.set_ylim(ylim)
+    ax.set_title(title, fontsize = 30)
+    fig.savefig(outfile)
     
 
 if  __name__ == "__main__":
@@ -42,4 +43,4 @@ if  __name__ == "__main__":
             d_depth.setdefault(items[0], []).append(d)
     
     
-    plot_coverage(d_depth, prefix, "%s.png"%(prefix), step=step, figsize=(30, 5), ylim=(0, max_depth))
+    plot_coverage(d_depth, prefix, "%s.png"%(prefix), step=step,  ylim=(0, max_depth))
